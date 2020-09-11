@@ -1,6 +1,28 @@
-<h2>All Tags</h2>
-<% @tags.each do |tag| %>
-    <div>
-        <%= tag.name %>
-    </div>
+
+
+<h1>Tags</h1>
+<%= link_to 'New Tag', new_tag_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.name %></td>
+        <td><%= link_to 'Show', tag %></td>
+        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
     <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
