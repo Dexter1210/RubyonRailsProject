@@ -12,6 +12,12 @@ class HomeController < ApplicationController
         render plain: "ok"
 
     end
+    def about
+    end
+
+    def contact
+    end
+    
 
 
 end
