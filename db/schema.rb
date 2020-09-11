@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_11_095254) do
+ActiveRecord::Schema.define(version: 2020_09_11_111300) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -20,7 +20,10 @@ ActiveRecord::Schema.define(version: 2020_09_11_095254) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-end
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
-#rails g scaffold Category name:string description:string published:boolean
-#for creation of the scaffold
+end
