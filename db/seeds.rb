@@ -14,3 +14,10 @@ Tag.create(name:"javascript")
 Tag.create(name:"react")
 Tag.create(name:"ruby")
 Tag.create(name:"rails")
+
+
+Category.delete_all
+
+Category.create(name:"Programming",description:"All about Programming",published: true)
+Category.create(name:"Programming1",description:"All about Programming1",published: true)
+Category.create(name:"Programming2",description:"All about Programming1",published: true)
