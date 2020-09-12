@@ -15,15 +15,25 @@
 
   <div class="container">
     
-   <%= render partial: "layouts/topmenu" %>
-   <p class="notice"><%= notice %> </p>
-   <div class="row">
-    <div class="col-md-9">
-    <%= yield %>
-    </div>
-    <div class="col-md-3">
-      <h6>CATEGORIES</h6>
-    </div>
+    <%= render partial: "layouts/topmenu" %>
+    
+
+    <p class="notice"><%= notice %> </p>
+     <div class="row">
+      <div class="col-md-9">
+         <%= yield %>
+      </div>
+      <div class="col-md-3">
+        <% if @categories %>
+        <h6>CATEGORIES</h6>
+        <%= render 'layouts/categories', :categories => @categories%>
+        <% end %>
+        <% if @tags %>
+        <h6> TAGS </h6>
+        <%= render 'layouts/tags', :tags => @tags%>
+        <% end %>
+
+       </div>
     </div>
 
     </div>
