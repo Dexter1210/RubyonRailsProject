@@ -2,11 +2,20 @@ class TagsController < ApplicationController
 
     before_action :set_tag,only: [:show, :destroy, :edit,:update]
     def index
-        @tags=Tag.all
+        @tags=Tag.all 
+        if params[:format] == "html"
+            p params[:format]
+        elsif params[:format] == "json"
+            render json: @tags
+        end
     end
 
     def show
        # @tag=Tag.find(params[:id])
+       if params[:format] == "html"
+    elsif params[:format] == "json"
+        render json: @tag
+    end
     end
 
     def new
@@ -62,3 +71,5 @@ class TagsController < ApplicationController
 
 
 end
+
+#can also use partial and in file we can write <%=render 'form', tag: @tag %> and remove @ from all files>
