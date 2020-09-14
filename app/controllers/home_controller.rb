@@ -5,8 +5,12 @@ class HomeController < ApplicationController
        # render plain: "This is index page"
        @categories=Category.all.includes(:posts)
        @tags=Tag.all
-       @posts=["posts1","posts2"] #This variable can be accessed on html page
+       @posts=Post.published.order_by_latest #This variable can be accessed on html page
 
+    end
+
+    def read
+        @post=Post.find(params[:id])
     end
 
     def ok
