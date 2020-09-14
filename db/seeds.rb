@@ -5,7 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Post.delete_all
 Tag.delete_all
+Category.delete_all
 
 
 #create will immeditaely save the tags in db
@@ -16,8 +18,18 @@ Tag.create(name:"ruby")
 Tag.create(name:"rails")
 
 
-Category.delete_all
 
-Category.create(name:"Programming",description:"All about Programming",published: true)
-Category.create(name:"Programming1",description:"All about Programming1",published: true)
-Category.create(name:"Programming2",description:"All about Programming1",published: true)
+
+cat_prog=Category.create(name:"Programming",description:"All about Programming",published: true)
+cat_prog1=Category.create(name:"Programming1",description:"All about Programming1",published: true)
+cat_prog2=Category.create(name:"Programming2",description:"All about Programming1",published: true)
+
+20.times do |i|
+    Post.create(
+        title:"Post #{i}",
+        body:"Post #{i} goes here...",
+        published: true,
+        category: i%2==0 ?cat_prog : cat_prog1
+    )
+end
+
