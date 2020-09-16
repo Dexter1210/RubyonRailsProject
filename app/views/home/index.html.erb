@@ -1,5 +1,15 @@
 <h1>Welcome Rails Blog</h1>
 
+
+<div class="card-columns">
+
+
+  <%=form_with(url: post_search_path,method: :get,local:true) do |f| %>
+    <%= f.text_field :q,placeholder: "search posts" %>
+    <%= f.submit "Search" %>
+    <%end%>
+</div>
+
 <%=paginate @posts %>
 
 <% @posts.each do |post| %>
