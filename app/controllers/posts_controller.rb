@@ -1,10 +1,18 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :check_authorization?, only: [:show, :edit ,:destroy]
+  before_action :authenticate_user!
+  
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.includes(:category).order("created_at DESC")
+
+    @q=Post.ransack(params[:q])
+
+    @posts = @q.result().includes(:category).order("created_at DESC").page(params[:page]).per(5)
+
+    #@posts = Post.all.includes(:category).order("created_at DESC").page(params[:page]).per(5)
   end
 
   # GET /posts/1
@@ -25,6 +33,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user=current_user
 
     respond_to do |format|
       if @post.save
@@ -69,6 +78,20 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :body, :published,:category_id)
+      params.require(:post).permit(:title, :body, :published,:category_id, tag_ids:[])
     end
+
+    def check_authorization?
+      unless authorize?(@post)
+        flash[:notice]="Unauthorized"
+        redirect_back(fallback_location: root_path)
+      end
+    end
+
+
+    def authorize? (post)
+      current_user.id == post.user.id
+    end
+
+    helper_method :authorize?
 end

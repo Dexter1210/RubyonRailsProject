@@ -15,5 +15,21 @@
   <%= @post.published %>
 </p>
 
+<p>
+  <strong>Author:</strong>
+  <%= @post.user.email%>
+</p>
+
+<p>
+  <strong>Tags:</strong>
+  <% @post.tags.each do |tag| %>
+    <li>
+    <%= link_to_if tag.posts.size > 0,  tag.name, tag_search_path(tag.name) %> 
+    </li>
+    <% end %>
+</p>
+
+
+
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

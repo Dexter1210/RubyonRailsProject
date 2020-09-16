@@ -21,9 +21,16 @@
   <%= form.collection_select :category_id, Category.all, :id, :name %>
 </div>
 
+<div class="field">
+  <%= form.label :tags%>
+  <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name,
+          {include_blank: true} %>
+</div>
+
+
   <div class="field">
     <%= form.label :body %>
-    <%= form.text_area :body %>
+    <%= form.rich_text_area :body %>
   </div>
 
   <div class="field">

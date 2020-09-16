@@ -18,6 +18,7 @@
         <td><%= category.name %></td>
         <td><%= category.description %></td>
         <td><%= category.published %></td>
+        
         <td><%= link_to 'Show', category ,class: "btn"  %></td>
         <td><%= link_to 'Edit', edit_category_path(category) ,class: "btn"  %></td>
         <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-danger"  %></td>

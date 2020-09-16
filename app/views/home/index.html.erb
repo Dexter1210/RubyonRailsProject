@@ -1,23 +1,32 @@
 <h1>Welcome Rails Blog</h1>
 
+<%=paginate @posts %>
+
 <% @posts.each do |post| %>
     <div class="card">
         <div class="card-body">
           <h4><%= post.title %></h4>
+          <span class="badge badge-warning">
+          <%= link_to post.category.name, category_search_path(post.category.name) %>
+         </span>
           <div>
-          <%=post.body.truncate(200) %>
+          <%=post.body %>
           </div>
         </div>
         <div class="card-footer">
         <h6> published at <%= time_ago_in_words( post.created_at) %></h6>
+        <span> created by <%=post.user.email %></span>
         <%= link_to "read more", post_read_path(post) %>
         <div class="d-flex justify-content-start">
         <% post.tags.each do |tag|%>
           <span class="badge badge-warning mr-2">
-            <%= link_to tag.name, tag_search_path(tag.name) %>
+            <%= link_to_if tag.posts.size > 0, tag.name, tag_search_path(tag.name) %>
             </span>
             <% end %>
             </div>
         </div>
       </div>
 <% end %>
+
+
+

@@ -5,7 +5,7 @@ class HomeController < ApplicationController
        # render plain: "This is index page"
        @categories=Category.all.includes(:posts)
        @tags=Tag.includes(:posts)
-       @posts=Post.includes(:tags).published.order_by_latest #This variable can be accessed on html page
+       @posts=Post.includes(:tags).published.order_by_latest.page(params[:page]).per(5) #This variable can be accessed on html page
        
 
     end
@@ -33,6 +33,15 @@ class HomeController < ApplicationController
         end
         render "home/index"
     end
+
+    def category_search
+        if params.has_key? (:category)
+            result=Category.where(name: params[:category])
+            @posts=result.blank? ? []: result.first.posts
+        end
+        render "home/index"
+    end
+
 
    
       
