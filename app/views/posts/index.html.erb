@@ -29,6 +29,7 @@
       <th>Published</th>
       <th>Tags</th>
       <th>User</th>
+      <th>Comments</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -47,6 +48,13 @@
           
           </td>
           <td><%=post.user.email %></td>
+          <td><% post.comments.each do |comment| %>
+            <li>
+            <%= comment.title %> 
+            </li>
+            <% end %>
+            
+            </td>
         <td><%= link_to 'Show', post,class:"btn" %></td>
         <% if authorize?(post) %>
         <td><%= link_to 'Edit', edit_post_path(post),class:"btn" %></td>

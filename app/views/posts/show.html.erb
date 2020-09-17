@@ -29,6 +29,15 @@
     <% end %>
 </p>
 
+<p>
+  <strong>Conversations:</strong>
+  <% @post.comments.each do |comment| %>
+    <li>
+    <%= comment.title %> 
+    </li>
+    <% end %>
+</p>
+
 
 
 <%= link_to 'Edit', edit_post_path(@post) %> |

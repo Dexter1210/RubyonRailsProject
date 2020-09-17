@@ -5,11 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "Deleting tables..."
+
+connection = ActiveRecord::Base.connection()
+connection.execute("delete from action_text_rich_texts");
+connection.execute("delete from active_storage_attachments");
+connection.execute("delete from active_storage_blobs");
+# connection.execute("delete from friendly_id_slugs");
+connection.close()
+
 Tagging.delete_all
+Comment.delete_all
 Post.delete_all
 Tag.delete_all
 Category.delete_all
 User.delete_all
+
+
+
 
 
 
@@ -39,5 +53,17 @@ cat_prog2=Category.create(name:"Programming2",description:"All about Programming
         category: i%2==0 ?cat_prog : cat_prog1,
         tags: i%2 ==0? [tag_rails,tag_ruby] : [tag_js,tag_react]
     )
+end
+
+Post.all.each do |post|
+    3.times do |i|
+    post.comments.build(title: Faker::ChuckNorris.fact,
+    content: Faker::ChuckNorris.fact, 
+    user: i%2==0? devesh : yogesh
+     )
+
+     post.save
+
+    end
 end
 

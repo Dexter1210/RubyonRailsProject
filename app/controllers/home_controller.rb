@@ -12,7 +12,19 @@ class HomeController < ApplicationController
     end
 
     def read
-        @post=Post.find(params[:id])
+        @post=Post.includes(:comments, :user).find(params[:id])
+    end
+
+
+
+    def comments
+        @post=Post.find(params[:post_id])
+        @comment=Comment.new(comment_params)
+        @comment.post=@post
+        @comment.user=current_user
+        @comment.save
+
+        redirect_to post_read_path(@post)
     end
 
     def ok
@@ -56,6 +68,13 @@ class HomeController < ApplicationController
     def contact
         @categories=Category.all
         @tags=Tag.all
+    end
+
+
+    private
+
+    def comment_params
+        params.require(:comment).permit(:title,:content)
     end
 
 

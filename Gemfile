@@ -56,3 +56,5 @@ gem 'kaminari'
 gem 'ransack'
 
 
+gem 'faker'
+
